@@ -38,32 +38,46 @@ let changeText = () => {
 changeText();
 setInterval(changeText, 3000);
 
-//circle skill //
+// Circle skill animation //
+const animateCircles = () => {
+  const circles = document.querySelectorAll(".circle");
+  circles.forEach((elem) => {
+    var dots = elem.getAttribute("data-dots");
+    var marked = elem.getAttribute("data-percent");
+    var percent = Math.floor((dots * marked) / 100);
+    var points = "";
+    var rotate = 360 / dots;
 
-const circles = document.querySelectorAll(".circle");
-circles.forEach((elem) => {
-  var dots = elem.getAttribute("data-dots");
-  var marked = elem.getAttribute("data-percent");
-  var percent = Math.floor((dots * marked) / 100);
-  var points = "";
-  var rotate = 360 / dots;
+    for (let i = 0; i < dots; i++) {
+      points += `<div class="points" style="--i:${i}; --rot:${rotate}deg"></div>`;
+    }
 
-  for (let i = 0; i < dots; i++) {
-    points += `<div class="points" style="--i:${i}; --rot:${rotate}deg"></div>`;
-  }
+    elem.innerHTML = points;
 
-  elem.innerHTML = points;
+    const pointsMarked = elem.querySelectorAll(".points");
+    for (let i = 0; i < percent; i++) {
+      pointsMarked[i].classList.add("marked");
+    }
+  });
+};
 
-  const pointsMarked = elem.querySelectorAll(".points");
-  for (let i = 0; i < percent; i++) {
-    pointsMarked[i].classList.add("marked");
+// Call the circle animation function initially
+animateCircles();
+
+// Scroll event listener to trigger the circle animation when scrolling to skills section
+window.addEventListener("scroll", () => {
+  const skillsSection = document.querySelector(".skills");
+
+  // Check if the skills section is in the viewport
+  if (skillsSection.getBoundingClientRect().top < window.innerHeight / 2) {
+    animateCircles();
   }
 });
 
-// mix it up
+// Mix it up
 var mixer = mixitup(".portfolio-gallery");
 
-// active menu///
+// Active menu
 let menuLi = document.querySelectorAll("header ul li a");
 let section = document.querySelectorAll("section");
 
@@ -77,13 +91,13 @@ function activeMenu() {
 activeMenu();
 window.addEventListener("scroll", activeMenu);
 
-// sticky nvabar///
+// Sticky navbar
 const header = document.querySelector("header");
 window.addEventListener("scroll", function () {
   header.classList.toggle("sticky", window.scrollY > 50);
 });
 
-// toggle icon nvabar///
+// Toggle icon navbar
 let menuIcon = document.querySelector("#menu-icon");
 let navlist = document.querySelector(".navlist");
 
@@ -97,8 +111,7 @@ window.onscroll = () => {
   navlist.classList.remove("open");
 };
 
-// parallax///
-
+// Parallax
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
