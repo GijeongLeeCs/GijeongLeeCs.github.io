@@ -1054,8 +1054,7 @@ footer a i {
   }
 
   .liquid-shape {
-    width: 80%;
-    left: 10%;
+    display: block;
   }
 
   .info-about1,
