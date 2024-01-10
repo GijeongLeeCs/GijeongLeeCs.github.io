@@ -1,3 +1,4 @@
+// Word animation
 let words = document.querySelectorAll(".word");
 words.forEach((word) => {
   let letters = word.textContent.split("");
@@ -38,7 +39,7 @@ let changeText = () => {
 changeText();
 setInterval(changeText, 3000);
 
-// Circle skill animation //
+// Circle skill animation
 const animateCircles = () => {
   const circles = document.querySelectorAll(".circle");
   circles.forEach((elem) => {
@@ -61,18 +62,69 @@ const animateCircles = () => {
   });
 };
 
-// Call the circle animation function initially
-animateCircles();
+// Intersection Observer for Circle skill animation
+const circleObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show-items");
+        animateCircles(); // Trigger circle animation when in view
+      } else {
+        entry.target.classList.remove("show-items");
+        // Reset animation state if needed
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
 
-// Scroll event listener to trigger the circle animation when scrolling to skills section
-window.addEventListener("scroll", () => {
-  const skillsSection = document.querySelector(".skills");
+// Observe the skills section for Circle skill animation
+circleObserver.observe(document.querySelector(".skills"));
 
-  // Check if the skills section is in the viewport
-  if (skillsSection.getBoundingClientRect().top < window.innerHeight / 2) {
-    animateCircles();
-  }
-});
+// Skill bar animation
+const animateSkillBars = () => {
+  const skillBars = document.querySelectorAll(".skill-bar");
+
+  skillBars.forEach((skillBar) => {
+    const info = skillBar.querySelector(".info");
+    const bar = skillBar.querySelector(".bar span");
+
+    const skillObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Your existing animation code here
+            bar.classList.add("animated");
+            setTimeout(() => {
+              bar.classList.remove("animated");
+            }, 1000); // Adjust the duration based on your actual animation duration
+
+            skillObserver.unobserve(skillBar); // Unobserve once animation is triggered
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    // Observe each skill bar individually
+    skillObserver.observe(skillBar);
+  });
+};
+
+// Scroll event listener to trigger skill bar animation when scrolling to skills section
+const skillsSectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateSkillBars(); // Trigger skill bar animation when in view
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+// Observe the skills section for Skill bar animation
+skillsSectionObserver.observe(document.querySelector(".skills"));
 
 // Mix it up
 var mixer = mixitup(".portfolio-gallery");

@@ -841,15 +841,6 @@ footer a i {
   }
 }
 
-@keyframes HTML {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 72%;
-  }
-}
-
 @keyframes CSS {
   0% {
     width: 0%;
@@ -910,6 +901,30 @@ footer a i {
   }
   100% {
     width: 30%;
+  }
+}
+
+@keyframes HTML {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 72%;
+  }
+}
+
+.skill-bar .bar span.animated {
+  animation: skillBarAnimation 1s ease;
+}
+
+@keyframes skillBarAnimation {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: var(
+      --percent
+    ); /* Add this line to dynamically set the width based on the data-percent attribute */
   }
 }
 
