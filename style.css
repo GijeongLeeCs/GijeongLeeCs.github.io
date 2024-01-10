@@ -1061,7 +1061,7 @@ footer a i {
   .info-about1,
   .info-about2,
   .info-about3 {
-    display: none;
+    display: block;
   }
 
   .img-about p {
