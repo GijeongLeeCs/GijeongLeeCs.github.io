@@ -1023,12 +1023,6 @@ footer a i {
     margin-bottom: 5rem;
   }
 
-  .liquid-shape {
-    width: 80%;
-    left: 10%;
-    top: 13%;
-  }
-
   .about {
     flex-direction: column-reverse;
   }
@@ -1058,6 +1052,12 @@ footer a i {
   .img-about img {
     width: 300px;
   }
+
+  .liquid-shape {
+    width: 80%;
+    left: 10%;
+  }
+
   .info-about1,
   .info-about2,
   .info-about3 {
