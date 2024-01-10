@@ -974,6 +974,12 @@ footer a i {
   #menu-icon.bx-x {
     transform: rotate(-180deg);
   }
+
+  .liquid-shape {
+    width: 80%;
+    left: 10%;
+  }
+
   .navlist {
     display: flex;
     position: absolute;
